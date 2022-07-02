@@ -1,0 +1,21 @@
+
+<b>Autopilot Configuration</b>
+Select an option number, see option details when selected
+
+<b>>> General Settings</b>
+[<b>1</b>] Edit schedule
+[<b>2</b>] Late-to-class threshold: {} minute(s)
+[<b>3</b>] Sleep interval: {} second(s)
+[<b>4</b>] Ask password: {}
+
+<b>>> Zoom Settings</b>
+[<b>5</b>] Video preview: {}
+[<b>6</b>] Fullscreen: {}
+[<b>7</b>] Close home window: {}
+
+<b>>> PyAutoGUI Settings</b>
+[<b>8</b>] Remove screenshots: {}
+[<b>9</b>] Screen resolution: {}
+[<b>10</b>] Home window pos: {}
+
+[<b>0</b>] Save and close

@@ -1,0 +1,6 @@
+<b>{}</b>
+
+On day(s): {}
+Time: {}
+Meeting ID: {}
+

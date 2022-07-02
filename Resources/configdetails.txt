@@ -1,0 +1,27 @@
+<b>Late-to-class threshold</b>: {} minute(s)
+Suppose you're X minutes late to your meeting and you invoke default Autopilot. If X is below the threshold, the program will immediately join the meeting. If X is above the threshold, the program will wait for your next scheduled meeting. Defaults to 10 minutes.
+New value for option? (0-59)
+<b>Sleep interval</b>: {} second(s)
+Number of seconds that the program sleeps in between every time check, when waiting for a meeting. Defaults to 10 seconds.
+New value for option? (1-59)
+<b>Ask password</b>: {}
+Your user password is needed in order to schedule the display waking (command needs sudo), and to log in once it's awake. This option is ON by default. If you disable this option, you'll need to make sure password isn't prompted when waking your mac: System Preferences > Security & Privacy > Require Password after sleep or screen saver begins (set to the max).
+New value for option? (on/off)
+<b>Video preview</b>: {}
+If you have disabled the video preview window on Zoom (this window appears before entering a meeting), switch this to OFF. ON by default.
+New value for option? (on/off)
+<b>Fullscreen</b>: {}
+Go fullscreen when entering meeting. ON by default. There is an option to do this automatically on Zoom as well.
+New value for option? (on/off)
+<b>Close home window</b>: {}
+Close the home window (the one with new meeting & join buttons) once you're in a meeting. ON by default.
+New value for option? (on/off)
+<b>Remove screenshots</b>: {}
+Sometimes PyAutoGUI leaves screenshots in your files whenever checking for specific colors/buttons. This is not intentional. Removing them is OFF by default because I personally wouldn't mess with my home folder (screenshots are saved in the current working dir).
+New value for option? (on/off)
+<b>Screen resolution</b>: {}
+The pixel resolution of your main display. Defaults to exactly that.
+New values for option? (separate by a space or comma)
+<b>Home window pos</b>: {}
+The pixel position of the home window (the one with new meeting & join buttons). I recommend leaving this at (0, 0) and moving your window to the top-left corner before using autopilot.
+New values for option</b>? (separate by a space or comma)
