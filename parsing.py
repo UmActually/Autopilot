@@ -6,7 +6,7 @@ from model import Meeting, Time, Config
 import utils
 
 
-readme = 'https://github.com/UmActually/Autopilot'
+readme = 'https://github.com/UmActually/Autopilot#autopilot'
 
 
 parser = argparse.ArgumentParser(prog='autopilot')
@@ -35,7 +35,7 @@ parser.add_argument('-i', '--input', action='store_true',
 parser.add_argument('-q', '--quiet', action='store_true',
                     help='print nothing to the console')
 
-parser.add_argument('--version', action='version', version='%(prog)s 0.6.0')
+parser.add_argument('--version', action='version', version='%(prog)s 0.6.1')
 
 args = parser.parse_args(sys.argv[1:])
 

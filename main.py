@@ -86,7 +86,7 @@ def enter_meeting():
         _print(f'Opening zoom: {utils.time_string()}')
 
     utils.open_app('zoom.us')
-    utils.wait_until_color(122, 276, 239, 124, 65)
+    utils.wait_until_color(122, 276, 239, 124, 65, timeout=8)
     utils.hotkey('command', 'j', wait=0.5)
     pag.typewrite(str(meeting.zoom))
     sleep(0.3)

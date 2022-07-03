@@ -11,7 +11,7 @@ then
   echo "Seems like Autopilot is already installed."
   exit 1
 else
-  mkdir ~/Library/com.UmActually.Autopilot
+  mkdir ~/Library/com.UmActually.Autopilot ~/Library/com.UmActually.Autopilot/Resources
 fi
 
 echo -e "\nInstalling PyAutoGUI (Python module for automation)\n"
@@ -19,7 +19,8 @@ python3 -m pip install pyautogui
 echo
 
 echo -e "\nCopying source files to ~/Library/com.UmActually.Autopilot"
-cp -R . ~/Library/com.UmActually.Autopilot
+cp -R *.py *.bash *.md ~/Library/com.UmActually.Autopilot
+cp -R Resources/*.cpp Resources/*.json Resources/*.txt Resources/*.png ~/Library/com.UmActually.Autopilot/Resources
 
 echo -e "\nCreating autopilot & ap executables"
 c++ Resources/autopilot.cpp -o Resources/autopilot
