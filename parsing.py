@@ -6,7 +6,7 @@ from model import Meeting, Time, Config
 import utils
 
 
-readme = 'https://github.com/UmActually/Autopilot/blob/main/README.md'
+readme = 'https://github.com/UmActually/Autopilot'
 
 
 parser = argparse.ArgumentParser(prog='autopilot')
@@ -35,30 +35,9 @@ parser.add_argument('-i', '--input', action='store_true',
 parser.add_argument('-q', '--quiet', action='store_true',
                     help='print nothing to the console')
 
-parser.add_argument('--version', action='version', version='%(prog)s 0.5.0')
+parser.add_argument('--version', action='version', version='%(prog)s 0.6.0')
 
 args = parser.parse_args(sys.argv[1:])
-
-
-def remind(meeting: Meeting):
-    """Write the meeting time and ID to Resources/recent.txt in case
-    the next usage has the -r flag. If meeting was right now, "None"
-    will be written as the time."""
-    utils.open_file('Resources/recent.txt',
-                    f'{meeting.time}\n{meeting.zoom}\n{meeting.name}')
-
-
-def remember() -> Meeting:
-    """The past funtion but the other way around."""
-    time, zoom, name = utils.open_file('Resources/recent.txt').split('\n')
-    if name == 'None':
-        name = None
-    meeting = Meeting(zoom=Meeting.parse_id(zoom), name=name)
-    if time == 'None':
-        meeting.is_right_now = True
-    else:
-        meeting.time = Time.from_string(time)
-    return meeting
 
 
 def tries_twice(func: Callable) -> Callable:
@@ -82,8 +61,10 @@ def figure_out_meeting_info(raw_time: str, raw_zoom: str, config: Config) -> Mee
     """Get the meeting time and ID with whatever information is available."""
     if args.recent:
         try:
-            return remember()
-        except ValueError:
+            meeting = Meeting.from_dict(utils.open_file('Resources/recent.json'))
+            meeting.infer_wake()
+            return meeting
+        except KeyError:
             print('No recent meeting info was found.')
             exit()
 
@@ -109,13 +90,13 @@ def figure_out_meeting_info(raw_time: str, raw_zoom: str, config: Config) -> Mee
 
         if meeting is not None:
             return meeting
-        if not args.quiet:
-            print('Your schedule is empty. Run "autopilot -c" to open settings '
-                  'and edit your schedule. You can also pass meeting time & ID '
-                  f'as arguments. Check the README for a full guide: {readme}')
+        else:
+            if not args.quiet:
+                print('Your schedule is empty. Run "autopilot -c" to open settings '
+                      'and edit your schedule. You can also pass meeting time & ID '
+                      f'as arguments. Check the README for a full guide: {readme}')
             exit()
 
-    now = False
     if raw_time != 'auto' and raw_zoom != 'auto':
         time = Time.from_string(raw_time)
         zoom = Meeting.parse_id(raw_zoom)
@@ -123,16 +104,11 @@ def figure_out_meeting_info(raw_time: str, raw_zoom: str, config: Config) -> Mee
     else:
         time = Time.from_string(raw_time)
         zoom = Meeting.parse_id(raw_zoom)
-
-        if time is None:
-            now = True
-            # time = Time.from_string(ask=True)
+        # if time is None:
+        #     time = Time.from_string(ask=True)
         if zoom is None:
             zoom = Meeting.parse_id(ask=True)
         meeting = Meeting(time, zoom)
-    if now:
-        meeting.is_right_now = True
-    else:
-        meeting.infer_wake()
 
+    meeting.infer_wake()
     return meeting

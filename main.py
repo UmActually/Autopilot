@@ -43,7 +43,7 @@ def wait_for_meeting():
     _print((f'"{meeting.name}" found in schedule. ' * (meeting.name is not None))
            + f'Wake time: {meeting.wake}')
 
-    _print(f'Autopilot ready. You can now put your mac to sleep.')
+    _print(f'Autopilot ready. You can now put your mac to sleep. To cancel, use ctrl+C.')
 
     sooner = meeting.time.subtracting_minute()
     is_awake = True
@@ -79,8 +79,7 @@ def wait_for_meeting():
 def enter_meeting():
     """Once everything's ready, open Zoom, enter the meeting.
     With the default config, join audio and go fullscreen."""
-    parsing.remind(meeting)
-
+    utils.open_file('Resources/recent.json', meeting.as_dict())
     if meeting.is_right_now and meeting.name is not None:
         _print(f'Joining "{meeting.name}": {utils.time_string()}')
     else:

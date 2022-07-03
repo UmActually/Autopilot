@@ -17,7 +17,7 @@ What really makes this a convenient tool is the possibility of building your own
 ```commandline
 % autopilot
 "Electromagnetism Exam" found in schedule. Wake time: 7/5/2022 11:00:00
-Autopilot ready. You can now put your mac to sleep.
+Autopilot ready. You can now put your mac to sleep. To cancel, use ctrl+C.
 Waiting for meeting...
 ```
 
@@ -42,7 +42,7 @@ If instead the user needs to join a meeting that is not in the schedule, the mee
 ```commandline
 % ap 16:00 https://example.zoom.us/j/123456789
 Wake time: 7/5/2022 16:00:00
-Autopilot ready. You can now put your mac to sleep.
+Autopilot ready. You can now put your mac to sleep. To cancel, use ctrl+C.
 Waiting for meeting...
 ```
 
@@ -51,6 +51,38 @@ If the time argument is not passed, the meeting will be joined immediately.
 ```commandline
 % ap https://example.zoom.us/j/123456789
 Opening zoom: 16:03:34
+```
+
+## Installation
+
+To install Autopilot, download or clone this repository and use the **install.bash** script located at the base folder. Here is a step-by-step description:
+
+1. Once you have the Autopilot repository on your computer, open the **Terminal** application.
+
+2. **Change your directory** to the Autopilot base folder. For example, if the Autopilot folder is located in your downloads, run `cd Downloads/Autopilot` in the terminal.
+
+3. **Make the install script executable** by running the command `chmod u+x install.bash`.
+
+4. Run the **script** with `./install.bash`.
+
+```commandline
+$ cd Downloads/Autopilot
+$ chmod u+x install.bash
+$ ./install.bash
+
+Installing PyAutoGUI (Python module for automation)
+
+...
+
+Copying source files to ~/Library/com.UmActually.Autopilot
+
+Creating autopilot & ap executables
+
+Moving executables to /usr/local/bin/
+
+Password:
+
+Autopilot successfully installed. Reopen your terminal to start using it.
 ```
 
 ## First use
@@ -62,6 +94,12 @@ There are some things to consider and prepare before using Autopilot. For starte
 In the first use, it is very likely that some functions of the program will throw a macOS confirmation dialog:
 - Using **PyAutoGUI** will prompt you to give the Terminal access to accessibility functions, unless access was already given.
 - Also, using **AppleScripts** will result in an initial confirmation prompt. 
+
+### Preventing chaos
+
+You must be **very careful** with this. Automating keyboard and mouse can lead to _some accidents_. **If you ever need to stop the program** while it's entering a meeting, immediately **move the mouse** cursor to one of the **corners** of the screen.
+
+If instead you need to stop the program while it's **waiting** for a meeting, just use **control + C** in the terminal.
 
 ### Window positioning
 

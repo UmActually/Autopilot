@@ -11,6 +11,7 @@ import pyautogui as pag
 
 
 sources_path = f'/Users/{getpass.getuser()}/Library/com.UmActually.Autopilot/'
+sys.tracebacklimit = 0
 factor = 2
 
 

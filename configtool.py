@@ -75,6 +75,8 @@ def add_or_edit_meeting(index: Optional[int] = None, meeting: Optional[Meeting] 
 
     if not editing:
         meeting = Meeting()
+        meeting.is_on_sched = True
+        meeting.is_right_now = False
 
     for attr, cls, prompt, limits in tuples:
         value = utils.sometimes_trust_user_input(
