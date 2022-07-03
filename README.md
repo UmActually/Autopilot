@@ -10,7 +10,7 @@ Autopilot features two primary use cases:
 
 Use case number two enables the user, for example, to leave Autopilot at night and wake up with one task less in their morning routine: Zoom's already open. No need to ask the team or class for the meeting ID this time.
 
-###User-defined schedule
+### User-defined schedule
 
 What really makes this a convenient tool is the possibility of building your own schedule for meetings that is automatically saved and repeated on a weekly basis. When you run `autopilot` with no arguments, the program will search and wait for the next meeting in your schedule. Or if you happen to be 10 minutes late to a past meeting, it will immediately join that instead.
 
