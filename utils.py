@@ -183,9 +183,7 @@ def type_password(password: str):
 
 def change_wake_time(new_time):
     """If the user disabled the ask password option, this is the
-    alternative way to schedule a display wake (in System Preferences).
-    This is one of those functions without a typing annotation, because
-    it would cause a circular import :("""
+    alternative way to schedule a display wake (in System Preferences)."""
     open_app('/System/Applications/System Preferences.app')
     sleep(2)
     hotkey('command', 'f', wait=0.3)

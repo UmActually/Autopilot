@@ -79,6 +79,8 @@ def wait_for_meeting():
 def enter_meeting():
     """Once everything's ready, open Zoom, enter the meeting.
     With the default config, join audio and go fullscreen."""
+    parsing.remind(meeting)
+
     if meeting.is_right_now and meeting.name is not None:
         _print(f'Joining "{meeting.name}": {utils.time_string()}')
     else:

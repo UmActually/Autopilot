@@ -6,6 +6,9 @@ from model import Meeting, Time, Config
 import utils
 
 
+readme = 'https://github.com/UmActually/Autopilot/blob/main/README.md'
+
+
 parser = argparse.ArgumentParser(prog='autopilot')
 
 parser.add_argument('time', nargs='?', default='auto',
@@ -37,6 +40,27 @@ parser.add_argument('--version', action='version', version='%(prog)s 0.5.0')
 args = parser.parse_args(sys.argv[1:])
 
 
+def remind(meeting: Meeting):
+    """Write the meeting time and ID to Resources/recent.txt in case
+    the next usage has the -r flag. If meeting was right now, "None"
+    will be written as the time."""
+    utils.open_file('Resources/recent.txt',
+                    f'{meeting.time}\n{meeting.zoom}\n{meeting.name}')
+
+
+def remember() -> Meeting:
+    """The past funtion but the other way around."""
+    time, zoom, name = utils.open_file('Resources/recent.txt').split('\n')
+    if name == 'None':
+        name = None
+    meeting = Meeting(zoom=Meeting.parse_id(zoom), name=name)
+    if time == 'None':
+        meeting.is_right_now = True
+    else:
+        meeting.time = Time.from_string(time)
+    return meeting
+
+
 def tries_twice(func: Callable) -> Callable:
     """If the positional arg parsing (time and meeting ID) doesn't work,
     try passing the arguments the other way around."""
@@ -56,6 +80,13 @@ def tries_twice(func: Callable) -> Callable:
 @tries_twice
 def figure_out_meeting_info(raw_time: str, raw_zoom: str, config: Config) -> Meeting:
     """Get the meeting time and ID with whatever information is available."""
+    if args.recent:
+        try:
+            return remember()
+        except ValueError:
+            print('No recent meeting info was found.')
+            exit()
+
     if args.input:
         time = Time.from_string(ask=True)
         zoom = Meeting.parse_id(ask=True)
@@ -81,7 +112,7 @@ def figure_out_meeting_info(raw_time: str, raw_zoom: str, config: Config) -> Mee
         if not args.quiet:
             print('Your schedule is empty. Run "autopilot -c" to open settings '
                   'and edit your schedule. You can also pass meeting time & ID '
-                  'as arguments. Check the README for a full guide: [LINK]')
+                  f'as arguments. Check the README for a full guide: {readme}')
             exit()
 
     now = False
